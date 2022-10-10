@@ -6,61 +6,36 @@ namespace SredniaOcen
     {
         static void Main(string[] args)
         {
-            // wprowadzanie liczby ocen
-            int liczbaOcen = 0;
-            while (liczbaOcen <= 0)
+            int marksCount = 0;
+
+            while (marksCount <= 0)
             {
-                Console.WriteLine("Podaj liczbę ocen: ");
-                liczbaOcen = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Insert number of marks: ");
+                marksCount = Convert.ToInt32(Console.ReadLine());
             }
 
-            // tworzenie tablic z ocenami i wagami
-            int[] tablicaOcen = new int[liczbaOcen];
-            int[] tablicaWag = new int[liczbaOcen];
+            int[] marksArray = new int[marksCount];
+            int[] weightArray = new int[marksCount];
 
-            // wprowadzanie ocen i wag
-
-            for (int i = 0; i < liczbaOcen; i++)
+            for (int i = 0; i < marksCount; i++)
             {
-                while (tablicaOcen[i] <= 0 || tablicaOcen[i] > 6)
+                while (marksArray[i] <= 0 || weightArray[i] > 5)
                 {
-                    Console.WriteLine("Podaj {0}. ocenę: ", i + 1);
-                    tablicaOcen[i] = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"Insert {i + 1}. mark, from 1-5:");
+                    marksArray[i] = Convert.ToInt32(Console.ReadLine());
                 }
-                while (tablicaWag[i] <= 0 || tablicaWag[i] > 6)
+                while (weightArray[i] <= 0 || weightArray[i] > 5)
                 {
-                    Console.WriteLine("Podaj wagę {0}. oceny: ", i + 1);
-                    tablicaWag[i] = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"Insert weight of {i + 1}. mark, from 1-5: ", i + 1);
+                    weightArray[i] = Convert.ToInt32(Console.ReadLine());
                 }
             }
 
-            Srednia sr = new Srednia();
-            float srednia;
-            srednia = sr.ObliczanieSredniej(tablicaOcen, tablicaWag);
-            Console.WriteLine("Twoja srednia ocen wynosi: {0}!", srednia);
+            Average av = new Average();
+            double average;
+            average = av.AverageCounting(marksArray, weightArray, marksCount);
+            Console.WriteLine($"Your average equals: {average}");
             Console.ReadKey();
-        }
-    }
-
-    class Srednia
-    {
-        public int ObliczanieSredniej(int[] oceny, int[] wagi)
-        {
-            int i = 0;
-            int sumaOcen = 0;
-            int sumaWag = 0;
-
-            foreach (var item in oceny)
-            {
-                sumaOcen += oceny[i] * wagi[i];
-            }
-            foreach (var item in wagi)
-            {
-                sumaWag += wagi[i];
-            }
-            double srednia;
-            srednia = sumaOcen / sumaWag;
-            return srednia;
         }
     }
 }
